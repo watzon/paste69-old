@@ -120,7 +120,6 @@ if (themeToggle) {
     document.documentElement.classList.remove("dark", "light");
     document.documentElement.classList.add(theme);
     localStorage.setItem("theme", theme);
-
     if (theme === "dark") {
       lightIcon!.classList.add("hidden");
       darkIcon!.classList.remove("hidden");

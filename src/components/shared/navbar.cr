@@ -28,7 +28,7 @@ class Shared::Navbar < BaseComponent
 
           # Theme toggle
           button id: "theme-toggle", class: "px-4 py-2 rounded-md focus:outline-none focus:shadow-outline-blue dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700", title: "Toggle theme" do
-            span id: "light-icon", class: "hidden" do
+            span id: "light-icon" do
               i class: "fas fa-sun fa-lg"
             end
             span id: "dark-icon" do
