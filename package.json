@@ -16,7 +16,8 @@
     "heroku-postbuild": "yarn prod",
     "dev": "yarn run mix",
     "watch": "yarn run mix watch",
-    "prod": "yarn run mix --production"
+    "prod": "yarn run mix --production",
+    "build": "yarn run mix --production"
   },
   "devDependencies": {
     "@babel/compat-data": "^7.9.0",
