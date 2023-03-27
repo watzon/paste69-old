@@ -4,7 +4,7 @@ class Shared::Navbar < BaseComponent
   def render
     nav class: "bg-gray-200 border-gray-200 py-2.5 dark:bg-gray-800" do
       div class: "flex flex-wrap justify-between items-center" do
-        a class: "flex items-center px-4", href: ENV["APP_BASE_URL"] do
+        a class: "flex items-center px-4", href: ENV["APP_DOMAIN"] do
           span "Paste69", class: "self-center text-xl font-semibold whitespace-nowrap dark:text-white"
         end
         div class: "flex items-center px-4 justify-between lg:order-2" do

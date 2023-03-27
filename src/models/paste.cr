@@ -13,10 +13,10 @@ class Paste < BaseModel
   end
 
   def link
-    File.join(ENV["APP_BASE_URL"], "p", hashed_id)
+    File.join(ENV["APP_DOMAIN"], "p", hashed_id)
   end
 
   def deletion_url
-    File.join(ENV["APP_BASE_URL"], "p", hashed_id, "delete?deletion_token=#{deletion_token}")
+    File.join(ENV["APP_DOMAIN"], "p", hashed_id, "delete?deletion_token=#{deletion_token}")
   end
 end

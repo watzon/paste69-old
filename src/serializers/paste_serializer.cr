@@ -8,8 +8,8 @@ class PasteSerializer < BaseSerializer
       success: true,
       paste: {
         id: hashed_id,
-        link: File.join(ENV["APP_BASE_URL"], hashed_id),
-        delete_link: File.join(ENV["APP_BASE_URL"], hashed_id, "delete?deletion_token=#{@paste.deletion_token}"),
+        link: File.join(ENV["APP_DOMAIN"], hashed_id),
+        delete_link: File.join(ENV["APP_DOMAIN"], hashed_id, "delete?deletion_token=#{@paste.deletion_token}"),
         contents: @paste.contents,
         language: @paste.language,
         created_at: @paste.created_at.to_utc,
