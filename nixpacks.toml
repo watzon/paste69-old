@@ -1,0 +1,4 @@
+providers = [ "crystal", "node" ]
+
+[phases.setup]
+nixPkgs = ['...', 'gmp', 'libyaml', 'libevent', 'libxml2']
