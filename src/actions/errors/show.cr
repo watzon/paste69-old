@@ -10,7 +10,7 @@ class Errors::Show < Lucky::ErrorAction
     if html?
       error_html "Sorry, we couldn't find that page.", status: 404
     else
-      error_json "Not found", status: 404
+      error_json false, "Not found", status: 404
     end
   end
 
@@ -21,7 +21,8 @@ class Errors::Show < Lucky::ErrorAction
       error_html DEFAULT_MESSAGE, status: 500
     else
       error_json \
-        message: error.renderable_message,
+        success: false,
+        error: error.renderable_message,
         details: error.renderable_details,
         param: error.invalid_attribute_name,
         status: 400
@@ -34,7 +35,7 @@ class Errors::Show < Lucky::ErrorAction
     if html?
       error_html DEFAULT_MESSAGE, status: error.renderable_status
     else
-      error_json error.renderable_message, status: error.renderable_status
+      error_json false, error.renderable_message, status: error.renderable_status
     end
   end
 
@@ -44,7 +45,7 @@ class Errors::Show < Lucky::ErrorAction
     if html?
       error_html DEFAULT_MESSAGE, status: 500
     else
-      error_json DEFAULT_MESSAGE, status: 500
+      error_json false, DEFAULT_MESSAGE, status: 500
     end
   end
 
@@ -53,8 +54,8 @@ class Errors::Show < Lucky::ErrorAction
     html_with_status Errors::ShowPage, status, message: message, status_code: status
   end
 
-  private def error_json(message : String, status : Int, details = nil, param = nil)
-    json ErrorSerializer.new(message: message, details: details, param: param), status: status
+  private def error_json(success : Bool, error : String, status : Int, details = nil, param = nil)
+    json ErrorSerializer.new(success: success, error: error, details: details, param: param), status: status
   end
 
   private def report(error : Exception) : Nil

@@ -6,3 +6,4 @@ LuckyEnv.load?(".env")
 require "lucky"
 require "avram/lucky"
 require "carbon"
+require "hashids"

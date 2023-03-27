@@ -1,0 +1,11 @@
+POST http://localhost:3000/api/v1/paste
+Content-Type: application/json
+
+{
+    "contents": "Hello World",
+    "language": "text"
+}
+
+###
+
+DELETE http://localhost:3000/api/v1/paste/6VYyzOBo?deletion_token=aa2jGRX5Ky6nf4XSE5Qxlw

@@ -1,11 +1,11 @@
 class Shared::LayoutHead < BaseComponent
-  needs page_title : String
+  needs page_title : String?
 
   def render
     head do
       utf8_charset
-      title "My App - #{@page_title}"
-      css_link asset("css/app.css")
+      title @page_title ? "Paste69 - #{@page_title}" : "Paste69"
+      # css_link asset("css/app.css")
       js_link asset("js/app.js"), defer: "true"
       csrf_meta_tags
       responsive_meta_tag

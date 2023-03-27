@@ -2,13 +2,14 @@
 # Feel free to customize it in any way you like.
 class ErrorSerializer < BaseSerializer
   def initialize(
-    @message : String,
+    @success : Bool,
+    @error : String,
     @details : String? = nil,
     @param : String? = nil # so you can track which param (if any) caused the problem
   )
   end
 
   def render
-    {message: @message, param: @param, details: @details}
+    {success: @success, error: @error, param: @param, details: @details}
   end
 end

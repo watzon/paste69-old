@@ -8,6 +8,9 @@ targets:
   app:
     main: src/paste69.cr
 
+crystalline:
+  main: src/app.cr
+
 crystal: 1.7.2
 
 dependencies:
@@ -29,6 +32,10 @@ dependencies:
   lucky_task:
     github: luckyframework/lucky_task
     version: ~> 0.1.1
+  hashids:
+    github: splattael/hashids.cr
+    version: 0.3.0  
+
 development_dependencies:
   lucky_flow:
     github: luckyframework/lucky_flow
