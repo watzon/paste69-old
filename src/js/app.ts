@@ -113,20 +113,13 @@ if (editorTextArea) {
 // Handle the theme toggle button
 const themeToggle = document.getElementById("theme-toggle") as HTMLButtonElement | null;
 if (themeToggle) {
-  const lightIcon = themeToggle!.querySelector("#light-icon") as HTMLElement | null;
-  const darkIcon = themeToggle!.querySelector("#dark-icon") as HTMLElement | null;
-
   function setTheme(theme: "dark" | "light") {
     document.documentElement.classList.remove("dark", "light");
     document.documentElement.classList.add(theme);
     localStorage.setItem("theme", theme);
     if (theme === "dark") {
-      lightIcon!.classList.add("hidden");
-      darkIcon!.classList.remove("hidden");
       if (editor) editor.setOption("theme", "ctp-mocha");
     } else {
-      lightIcon!.classList.remove("hidden");
-      darkIcon!.classList.add("hidden");
       if (editor) editor.setOption("theme", "ctp-latte");
     }
   }

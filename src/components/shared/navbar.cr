@@ -27,11 +27,11 @@ class Shared::Navbar < BaseComponent
           end
 
           # Theme toggle
-          button id: "theme-toggle", class: "px-4 py-2 rounded-md focus:outline-none focus:shadow-outline-blue dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700", title: "Toggle theme" do
-            span id: "light-icon" do
+          button id: "theme-toggle", type: "button", class: "px-4 py-2 rounded-md focus:outline-none focus:shadow-outline-blue dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700", title: "Toggle theme" do
+            span class: "inline-block dark:hidden" do
               i class: "fas fa-sun fa-lg"
             end
-            span id: "dark-icon" do
+            span class: "hidden dark:inline-block" do
               i class: "fas fa-moon fa-lg"
             end
           end
