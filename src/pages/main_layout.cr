@@ -16,6 +16,7 @@ abstract class MainLayout
       body class: "w-full h-full" do
         mount Shared::FlashMessages, context.flash
         content
+        mount Shared::Tracking
       end
     end
   end
