@@ -2,7 +2,7 @@ class Paste::IndexPage < MainLayout
   needs fork_of : Paste?
 
   def content
-    form_for Paste::Create, class: "h-full" do
+    form_for Paste::Create, class: "h-full", autocomplete: "off" do
       if paste = fork_of
         input type: "hidden", name: "paste:fork_of_id", value: paste.hashed_id
       end

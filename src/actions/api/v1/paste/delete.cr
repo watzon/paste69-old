@@ -1,5 +1,12 @@
+@[LuckySwagger::Action(
+  summary: "Delete a paste",
+  responses: [
+    Swagger::Response.new(code: "200", description: "Paste deleted"),
+    Swagger::Response.new(code: "422", description: "Invalid deletion token")
+  ]
+)]
 class API::V1::Paste::Delete < ApiAction
-  param deletion_token : String
+  param deletion_token : String = "Hello World"
 
   delete "/api/v1/paste/:hashed_id" do
     id = Hashids.instance.decode(hashed_id).first

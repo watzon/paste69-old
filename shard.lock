@@ -76,6 +76,10 @@ shards:
     git: https://github.com/luckyframework/lucky_router.git
     version: 0.5.2
 
+  lucky_swagger:
+    git: https://github.com/mrexox/lucky_swagger.git
+    version: 0.1.0+git.commit.86e230b753ee53737314d55580edd1648c4a7ede
+
   lucky_task:
     git: https://github.com/luckyframework/lucky_task.git
     version: 0.1.1
@@ -99,6 +103,10 @@ shards:
   splay_tree_map:
     git: https://github.com/wyhaines/splay_tree_map.cr.git
     version: 0.2.2
+
+  swagger:
+    git: https://github.com/icyleaf/swagger.git
+    version: 0.3.0
 
   teeplate:
     git: https://github.com/luckyframework/teeplate.git

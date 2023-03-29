@@ -32,6 +32,9 @@ dependencies:
   lucky_task:
     github: luckyframework/lucky_task
     version: ~> 0.1.1
+  lucky_swagger:
+    github: watzon/lucky_swagger
+    branch: master
   hashids:
     github: splattael/hashids.cr
     version: 0.3.0  

@@ -2,7 +2,7 @@ class Paste::ShowPage < MainLayout
   needs paste : Paste
 
   def content
-    form_for Paste::Create, class: "h-full" do
+    form_for Paste::Create, class: "h-full", autocomplete: "off" do
       div class: "flex flex-col h-screen justify-between" do
         mount Shared::Navbar, paste: paste
         div class: "w-full flex-grow" do
