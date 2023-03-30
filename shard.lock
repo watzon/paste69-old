@@ -77,7 +77,7 @@ shards:
     version: 0.5.2
 
   lucky_swagger:
-    git: https://github.com/watzon/lucky_swagger.git
+    path: ../lucky_swagger
     version: 0.2.0+git.commit.9db1297ba824fe762fc8accc92e76db9e7e1d055
 
   lucky_task:
