@@ -26,28 +26,6 @@ jobs:
       - name: Format
         run: crystal tool format --check
 
-  sentry_release:
-    strategy:
-      fail-fast: false
-      matrix:
-        crystal_version:
-          - 1.7.2
-        experimental:
-          - false
-    runs-on: ubuntu-latest
-    continue-on-error: ${{ matrix.experimental }}
-    steps:
-      - uses: actions/checkout@v2
-      - name: Sentry Release
-        uses: getsentry/action-release@v1.3.1
-        env:
-          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
-          SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
-          SENTRY_URL: https://logs.watzon.tech/
-        with:
-          environment: production
-
   # specs:
   #   strategy:
   #     fail-fast: false
