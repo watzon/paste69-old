@@ -8,6 +8,7 @@ class Paste < BaseModel
   end
 
   @hashed_id : String?
+
   def hashed_id
     @hashed_id = Hashids.instance.encode([id])
   end

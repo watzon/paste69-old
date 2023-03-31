@@ -2,7 +2,7 @@
   summary: "Show a paste",
   responses: [
     Swagger::Response.new(code: "200", description: "Returns the paste"),
-    Swagger::Response.new(code: "404", description: "Paste not found")
+    Swagger::Response.new(code: "404", description: "Paste not found"),
   ]
 )]
 class API::V1::Paste::Show < ApiAction
