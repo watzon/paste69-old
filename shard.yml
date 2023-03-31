@@ -37,7 +37,9 @@ dependencies:
     branch: master
   hashids:
     github: splattael/hashids.cr
-    version: 0.3.0  
+    version: 0.3.0
+  raven:
+    github: Sija/raven.cr
 
 development_dependencies:
   lucky_flow:

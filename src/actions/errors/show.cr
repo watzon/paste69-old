@@ -7,6 +7,7 @@ class Errors::Show < Lucky::ErrorAction
   dont_report [Lucky::RouteNotFoundError, Avram::RecordNotFoundError]
 
   def render(error : Lucky::RouteNotFoundError | Avram::RecordNotFoundError)
+    Raven.capture(error)
     if html?
       error_html "Sorry, we couldn't find that page.", status: 404
     else
@@ -17,6 +18,7 @@ class Errors::Show < Lucky::ErrorAction
   # When the request is JSON and an InvalidOperationError is raised, show a
   # helpful error with the param that is invalid, and what was wrong with it.
   def render(error : Avram::InvalidOperationError)
+    Raven.capture(error)
     if html?
       error_html DEFAULT_MESSAGE, status: 500
     else
@@ -32,6 +34,7 @@ class Errors::Show < Lucky::ErrorAction
   # Always keep this below other 'render' methods or it may override your
   # custom 'render' methods.
   def render(error : Lucky::RenderableError)
+    Raven.capture(error)
     if html?
       error_html DEFAULT_MESSAGE, status: error.renderable_status
     else
@@ -42,6 +45,7 @@ class Errors::Show < Lucky::ErrorAction
   # If none of the 'render' methods return a response for the raised Exception,
   # Lucky will use this method.
   def default_render(error : Exception) : Lucky::Response
+    Raven.capture(error)
     if html?
       error_html DEFAULT_MESSAGE, status: 500
     else
