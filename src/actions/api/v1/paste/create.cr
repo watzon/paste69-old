@@ -22,14 +22,6 @@ end
     Swagger::Response.new(code: "422", description: "Invalid parameters"),
   ]
 )]
-# @[LuckySwagger::Action(
-#   summary: "Create a new paste",
-#   request: SerializedPaste,
-#   responses: {
-#     200 => {description: "Paste created"},
-#     422 => {description: "Invalid parameters"},
-#   }
-# )]
 class API::V1::Paste::Create < ApiAction
   post "/api/v1/paste" do
     serialized_paste = SerializedPaste.from_json(params.body)
