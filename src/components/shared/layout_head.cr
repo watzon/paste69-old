@@ -5,7 +5,7 @@ class Shared::LayoutHead < BaseComponent
     head do
       utf8_charset
       title @page_title ? "Paste69 - #{@page_title}" : "Paste69 - Beautiful open source pastebin service"
-      # css_link asset("css/app.css")
+      css_link asset("css/app.css")
       js_link asset("js/app.js"), defer: "true"
       csrf_meta_tags
       responsive_meta_tag

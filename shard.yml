@@ -40,6 +40,9 @@ dependencies:
     version: 0.3.0
   raven:
     github: Sija/raven.cr
+  luce:
+    git: https://codeberg.org/supercell/luce
+    version: ~> 0.3.0
 
 development_dependencies:
   lucky_flow:

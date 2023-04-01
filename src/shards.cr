@@ -8,6 +8,7 @@ require "avram/lucky"
 require "carbon"
 require "hashids"
 require "lucky_swagger"
+require "luce"
 
 require "raven"
 require "raven/integrations/lucky"

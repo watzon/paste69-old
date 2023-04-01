@@ -1,20 +1,18 @@
 /* eslint no-console:0 */
 require("@rails/ujs").start();
 
-import * as twind from '@twind/core'
-import config from './twind.config'
+// import * as twind from '@twind/core'
+// import config from './twind.config'
+// twind.install(config)
 
 import "@fortawesome/fontawesome-free/js/all";
 
 import flourite from 'flourite';
 import CodeMirror from 'codemirror';
-import 'codemirror/lib/codemirror.css';
 
 import '../css/app.scss';
 import { loadCodeMirrorModule, codeMirrorLanguages } from './codemirror/languageModuleLoader';
-import { decl } from 'postcss';
 
-twind.install(config)
 
 declare global {
   function copyValue(str: string): void

@@ -60,6 +60,10 @@ shards:
     git: https://github.com/naqvis/crystal-html5.git
     version: 0.4.0
 
+  luce:
+    git: https://codeberg.org/supercell/luce
+    version: 0.3.0
+
   lucky:
     git: https://github.com/luckyframework/lucky.git
     version: 1.0.0

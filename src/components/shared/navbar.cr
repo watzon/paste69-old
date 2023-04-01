@@ -24,13 +24,20 @@ class Shared::Navbar < BaseComponent
           end
 
           if paste && current_page?(Paste::Show.with(hashed_id: paste.not_nil!.hashed_id))
-            link to: Paste::Fork::Create.with(hashed_id: paste.not_nil!.hashed_id), class: "ml-4 px-4 py-2 rounded-md focus:outline-none focus:shadow-outline-blue dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700", title: "Fork this paste" do
+            # Link to the markdown variant if this is a markdown paste
+            if paste.not_nil!.language == "Markdown"
+              a href: Paste::Show.path(hashed_id: paste.not_nil!.hashed_id) + ".md", class: "px-4 py-2 rounded-md focus:outline-none focus:shadow-outline-blue dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700", title: "View Rendered Markdown" do
+                i class: "fab fa-markdown fa-lg"
+              end
+            end
+
+            link to: Paste::Fork::Create.with(hashed_id: paste.not_nil!.hashed_id), class: "px-4 py-2 rounded-md focus:outline-none focus:shadow-outline-blue dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700", title: "Fork this paste" do
               i class: "fas fa-code-fork fa-lg"
             end
           end
 
           # Theme toggle
-          button id: "theme-toggle", type: "button", class: "px-4 py-2 rounded-md focus:outline-none focus:shadow-outline-blue dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700", title: "Toggle theme" do
+          button id: "theme-toggle", type: "button", class: "ml-4 px-4 py-2 rounded-md focus:outline-none focus:shadow-outline-blue dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700", title: "Toggle theme" do
             span class: "inline-block dark:hidden" do
               i class: "fas fa-sun fa-lg"
             end
@@ -40,7 +47,8 @@ class Shared::Navbar < BaseComponent
           end
         end
         div class: "hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1" do
-          if paste && current_page?(Paste::Show.with(hashed_id: paste.not_nil!.hashed_id))
+          # TODO: Make this better. It's a bit of a mess.
+          if paste && (current_page?("/p/#{paste.not_nil!.hashed_id}") || current_page?("/p/#{paste.not_nil!.hashed_id}.md"))
             div class: "flex justify-between items-center gap-4" do
               button type: "button", class: "px-4 py-2 rounded-md cursor-copy text-gray-600 dark:text-gray-400 focus:outline-none dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-300", onclick: "copyValue('#{paste.not_nil!.link}')", title: "Copy link" do
                 span "/#{paste.not_nil!.hashed_id}", class: "text-lg font-medium mr-2"

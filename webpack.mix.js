@@ -48,7 +48,7 @@ mix
   // https://github.com/JeffreyWay/laravel-mix/blob/master/docs/mixjs.md
   .ts("src/js/app.ts", "js").sourceMaps()
   // SASS entry file. Uses autoprefixer automatically.
-  // .sass("src/css/app.scss", "css")
+  .sass("src/css/app.scss", "css")
   // Customize postCSS:
   // https://github.com/JeffreyWay/laravel-mix/blob/master/docs/css-preprocessors.md#postcss-plugins
   .options({
