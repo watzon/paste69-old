@@ -47,19 +47,18 @@ class Shared::Navbar < BaseComponent
           end
         end
         div class: "hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1" do
-          # TODO: Make this better. It's a bit of a mess.
-          if paste && (current_page?("/p/#{paste.not_nil!.hashed_id}") || current_page?("/p/#{paste.not_nil!.hashed_id}.md"))
+          if !current_page?(Paste::Index)
             div class: "flex justify-between items-center gap-4" do
-              button type: "button", class: "px-4 py-2 rounded-md cursor-copy text-gray-600 dark:text-gray-400 focus:outline-none dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-300", onclick: "copyValue('#{paste.not_nil!.link}')", title: "Copy link" do
-                span "/#{paste.not_nil!.hashed_id}", class: "text-lg font-medium mr-2"
+              button type: "button", class: "px-4 py-2 rounded-md cursor-copy text-gray-600 dark:text-gray-400 focus:outline-none dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-300", onclick: "copyValue('#{ENV["APP_DOMAIN"] + context.request.path}')", title: "Copy link" do
+                span "#{context.request.path}", class: "text-lg font-medium mr-2"
                 i class: "fas fa-copy fa-lg"
               end
             end
           elsif paste && current_page?(Paste::Index.with(fork_of: paste.not_nil!.hashed_id))
             div class: "flex justify-between items-center gap-4" do
-              span class: "px-4 py-2 rounded-md text-gray-600 dark:text-gray-400", title: "Forking #{paste.not_nil!.hashed_id}" do
+              span class: "px-4 py-2 rounded-md text-gray-600 dark:text-gray-400", title: "Forking /p/#{paste.not_nil!.hashed_id}" do
                 i class: "fas fa-code-fork fa-lg mr-2"
-                span "/#{paste.not_nil!.hashed_id}", class: "text-lg font-medium"
+                span "/p/#{paste.not_nil!.hashed_id}", class: "text-lg font-medium"
               end
             end
           end

@@ -9,9 +9,35 @@ import "@fortawesome/fontawesome-free/js/all";
 
 import flourite from 'flourite';
 import CodeMirror from 'codemirror';
+import 'codemirror/mode/htmlmixed/htmlmixed';
+import 'codemirror/mode/css/css';
+import 'codemirror/mode/javascript/javascript';
+import 'codemirror/mode/markdown/markdown';
+import 'codemirror/mode/gfm/gfm';
+import 'codemirror/mode/yaml/yaml';
+import 'codemirror/mode/xml/xml';
+import 'codemirror/mode/php/php';
+import 'codemirror/mode/ruby/ruby';
+import 'codemirror/mode/python/python';
+import 'codemirror/mode/shell/shell';
+import 'codemirror/mode/clike/clike';
+import 'codemirror/mode/go/go';
+import 'codemirror/mode/rust/rust';
+import 'codemirror/mode/swift/swift';
+import 'codemirror/mode/dart/dart';
+import 'codemirror/mode/sql/sql';
+import 'codemirror/mode/dockerfile/dockerfile';
+import 'codemirror/mode/haskell/haskell';
+import 'codemirror/mode/lua/lua';
+import 'codemirror/mode/perl/perl';
+import 'codemirror/mode/r/r';
+import 'codemirror/mode/scheme/scheme';
+import 'codemirror/mode/clojure/clojure';
+import 'codemirror/mode/erlang/erlang';
+import 'codemirror/mode/julia/julia';
+import 'codemirror/mode/crystal/crystal';
 
 import '../css/app.scss';
-import { loadCodeMirrorModule, codeMirrorLanguages } from './codemirror/languageModuleLoader';
 
 
 declare global {
@@ -31,6 +57,47 @@ globalThis.copyValue = (str: string) => {
 // ██      ██   ██ ██    ██    ██    ██ ██   ██ 
 // ███████ ██████  ██    ██     ██████  ██   ██ 
 
+// A list of common languages that we want to be available to use in the editor.
+const enabledLanguages = [
+  "HTML",
+  "CSS",
+  "JavaScript",
+  "TypeScript",
+  "JSON",
+  "Markdown",
+  "YAML",
+  "XML",
+  "PHP",
+  "Ruby",
+  "Python",
+  "Bash",
+  "C",
+  "C++",
+  "C#",
+  "Java",
+  "Go",
+  "Rust",
+  "Swift",
+  "Kotlin",
+  "Dart",
+  "SQL",
+  "Dockerfile",
+  "Haskell",
+  "Lua",
+  "Perl",
+  "R",
+  "Scala",
+  "Scheme",
+  "Clojure",
+  "Elixir",
+  "Erlang",
+  "Julia",
+  "OCaml",
+  "Racket",
+  "Vim",
+  "Crystal",
+].sort(); // Sort alphabetically
+
 let editor: CodeMirror.Editor;
 const editorTextArea = document.getElementById("editor") as HTMLTextAreaElement;
 if (editorTextArea) {
@@ -49,42 +116,48 @@ if (editorTextArea) {
   // When the codemirror editor detects a change, start a timer. When it expires, use flourite to
   // detect the language and update the codemirror mode.
   const languageSelector = document.getElementById("language-selector") as HTMLSelectElement | null;
-  let timer: NodeJS.Timeout | null = null;
-  let langSetManually = false;
-  
-  function updateMode(editor: CodeMirror.Editor) {
-    if (langSetManually) return;
-  
-    if (timer) {
-      clearTimeout(timer);
+
+  // Set the editor mode to the given language.
+  function setMode(language: string) {
+    // Some languages will require additional configuration.
+    switch (language) {
+      case 'Markdown':
+        editor.setOption("mode", { name: "gfm", base: "markdown" });
+        break;
+      // Clike languages
+      case 'C':
+      case 'C++':
+      case 'C#':
+      case 'Java':
+      case 'Kotlin':
+      case 'Scala':
+        editor.setOption("mode", { name: "clike", base: "text" });
+        break;
+      // Javascript-like languages
+      case 'TypeScript':
+      case 'JavaScript':
+      case 'JSON':
+        editor.setOption("mode", { name: "javascript", base: "text" });
+        break;
+      default:
+        editor.setOption("mode", language.toLowerCase());
+        break;
     }
-    timer = setTimeout(() => {
-      const mode = flourite(editor.getValue());
-      console.log(mode);
-      if (mode.language !== "Unknown") {
-        loadCodeMirrorModule(mode.language).then(() => {
-          editor.setOption("mode", mode.language.toLowerCase());
-          if (languageSelector) languageSelector.value = mode.language;
-        });
-      }
-    }, 1000);
   }
-  editor.on("change", updateMode);
 
   // Look for the `data-language` attribute on the editor element. If it's set, use that
   // language instead of trying to detect it.
   const dataLanguage = editorTextArea.getAttribute("data-language");
   if (dataLanguage) {
-    loadCodeMirrorModule(dataLanguage).then(() => {
-      editor.setOption("mode", dataLanguage.toLowerCase());
-      if (languageSelector) languageSelector.value = dataLanguage;
-      langSetManually = true;
-    });
+    setMode(dataLanguage);
+    if (languageSelector) {
+      languageSelector.value = dataLanguage;
+    }
   }
   
   if (languageSelector) {
-    // Add all the languages to the language selector dropdown
-    for (const language of Object.keys(codeMirrorLanguages)) {
+    // Add all the enabled languages to the language selector
+    for (const language of enabledLanguages) {
       const option = document.createElement("option");
       option.value = language;
       option.innerText = language;
@@ -94,10 +167,7 @@ if (editorTextArea) {
     // When the language selector changes, update the codemirror mode
     languageSelector.addEventListener("change", (event) => {
       const language = (event.target as HTMLSelectElement).value;
-      loadCodeMirrorModule(language).then(() => {
-        editor.setOption("mode", language.toLowerCase());
-        langSetManually = true;
-      });
+      setMode(language);
     });
   }
 }

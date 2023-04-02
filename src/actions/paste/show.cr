@@ -14,7 +14,7 @@ class Paste::Show < BrowserAction
     if raw
       plain_text paste.contents
     elsif markdown
-      raw_html = Luce.to_html(paste.contents)
+      raw_html = Luce.to_html(paste.contents, extension_set: Luce::ExtensionSet::GITHUB_WEB)
       html Paste::Markdown::ShowPage, paste: paste, raw_html: raw_html
     else
       html Paste::ShowPage, paste: paste

@@ -7,8 +7,9 @@ class Shared::Footer < BaseComponent
         text " by "
         a "Chris Watson", href: "https://watzon.tech", class: "underline hover:text-gray-600 dark:hover:text-gray-400"
         text " | "
-        link "Privacy Policy", to: Home::PrivacyPolicy, class: "underline hover:text-gray-600 dark:hover:text-gray-400 mr-2"
-        # link "About", to: Home::About, class: "underline hover:text-gray-600 dark:hover:text-gray-400"
+        link "About", to: Home::About, class: "mr-2 underline hover:text-gray-600 dark:hover:text-gray-400"
+        link "Privacy Policy", to: Home::PrivacyPolicy, class: "mr-2 underline hover:text-gray-600 dark:hover:text-gray-400"
+        link "Terms of Use", to: Home::Terms, class: "underline hover:text-gray-600 dark:hover:text-gray-400"
       end
     end
   end

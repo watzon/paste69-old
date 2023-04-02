@@ -59,5 +59,6 @@ class Errors::Show < Lucky::ErrorAction
   end
 
   private def report(error : Exception) : Nil
+    Raven.capture(error)
   end
 end

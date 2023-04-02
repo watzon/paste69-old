@@ -4,7 +4,7 @@ class Home::PrivacyPolicyPage < MainLayout
   end
 
   def content
-    div class: "flex flex-col h-screen justify-between" do
+    div class: "flex flex-col h-full justify-between" do
       mount Shared::Navbar
       div class: "w-full flex-grow text-gray-800 bg-gray-200 dark:bg-gray-700 dark:text-gray-200" do
         mount Shared::MarkdownContent do

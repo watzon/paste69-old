@@ -6,7 +6,7 @@ class Paste::IndexPage < MainLayout
       if paste = fork_of
         input type: "hidden", name: "paste:fork_of_id", value: paste.hashed_id
       end
-      div class: "flex flex-col h-screen justify-between" do
+      div class: "flex flex-col h-full justify-between" do
         mount Shared::Navbar, paste: fork_of
         div class: "w-full flex-grow" do
           if paste = fork_of
