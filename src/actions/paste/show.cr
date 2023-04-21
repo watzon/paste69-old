@@ -15,7 +15,7 @@ class Paste::Show < BrowserAction
       raise Lucky::RouteNotFoundError.new(context)
     end
 
-    if paste = PasteQuery.find(id) rescue nil
+    if (paste = PasteQuery.find(id) rescue nil)
       if raw
         plain_text paste.contents
       elsif markdown
