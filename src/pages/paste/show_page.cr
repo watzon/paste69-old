@@ -3,7 +3,7 @@ class Paste::ShowPage < MainLayout
 
   def content
     form_for Paste::Create, class: "h-full", autocomplete: "off" do
-      div class: "flex flex-col h-full justify-between" do
+      div class: "flex flex-col min-h-full justify-between" do
         mount Shared::Navbar, paste: paste
         div class: "w-full h-full flex-grow" do
           textarea paste.contents, id: "editor", data_language: paste.language, readonly: true, disabled: true
