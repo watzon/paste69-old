@@ -84,5 +84,10 @@ if [ $(echo $response | jq -r '.success') != "true" ]; then
   exit 1
 fi
 
-# Print the URL from `paste.link`
-echo $(echo $response | jq -r '.paste.link')
+# Print links
+link=$(echo $response | jq -r '.paste.link')
+delete_link=$(echo $response | jq -r '.paste.delete_link')
+
+echo "Link: $link"
+echo "Raw link: $link?raw"
+echo "Delete link: $delete_link"
