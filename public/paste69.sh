@@ -36,7 +36,7 @@ else
     echo "Error: file $1 does not exist"
     exit 1
   fi
-  data=$(cat $1)
+  file=$1
 fi
 
 # Check if a language was provided
@@ -62,7 +62,16 @@ if [ ! -z "$language" ]; then
 fi
 
 # Make the request
-response=$(curl -s -X POST -H "Content-Type: text/plain" -d "$data" $url)
+if [ ! -z "$file" ]; then
+  response=$(curl -s -X POST -H "Content-Type: text/plain" --data-binary "@$file" $url)
+else
+  # Check if the data is too large
+  if [ ${#data} -gt 10000 ]; then
+    echo "Error: stdin input too large. Use a file instead."
+    exit 1
+  fi
+  response=$(curl -s -X POST -H "Content-Type: text/plain" -d "$data" $url)
+fi
 
 if [ $? -ne 0 ]; then
   echo "An error occurred while making the request"
