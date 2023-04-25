@@ -76,10 +76,19 @@ class Home::DocsPage < MainLayout
           chmod +x ~/.local/bin/paste69
           ```
 
+          To make things even easier you can also use the installer script located at [/install.sh](/install.sh). This script will install the bash script to `/usr/local/bin`. You can run it like this:
+
+          ```bash
+          sudo apt update && sudo apt install curl jq
+          curl -s https://0x45.st/install.sh | sudo bash
+          ```
+
           You can then use it like this:
 
           ```bash
           paste69 ./some-file.md --language Markdown
+          # or
+          cat ./some-file.md | paste69 --language Markdown
           ```
           MARKDOWN
         end

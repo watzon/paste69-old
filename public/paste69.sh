@@ -18,8 +18,35 @@ function show_help {
   echo "Usage:"
   echo "  paste69 <file> [options]"
   echo "Options:"
+  echo "  -h, --help                 Show this help text"
   echo "  -l, --language <language>  Set the language of the paste"
 }
+
+# Parse arguments
+while [[ $# -gt 0 ]]; do
+  key="$1"
+  case $key in
+    -h|--help)
+      show_help
+      exit 0
+      ;;
+    -l|--language)
+      language="$2"
+      shift
+      shift
+      ;;
+    *)
+      if [ -z "$file" ]; then
+        file=$1
+      else
+        echo "Error: too many arguments"
+        show_help
+        exit 1
+      fi
+      shift
+      ;;
+  esac
+done
 
 # Check if a path to a file was provided, otherwise read from stdin. If all
 # else fails, show the help text.
@@ -37,22 +64,6 @@ else
     exit 1
   fi
   file=$1
-fi
-
-# Check if a language was provided
-if [ ! -z "$2" ]; then
-  if [ "$2" == "-l" ] || [ "$2" == "--language" ]; then
-    if [ -z "$3" ]; then
-      echo "Error: no language provided"
-      show_help
-      exit 1
-    fi
-    language="$3"
-  else
-    echo "Error: invalid option $2"
-    show_help
-    exit 1
-  fi
 fi
 
 # Build the URL
