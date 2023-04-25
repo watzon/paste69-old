@@ -10,7 +10,7 @@ class Home::PrivacyPolicyPage < MainLayout
         mount Shared::MarkdownContent do
           raw Luce.to_html <<-MARKDOWN
           # Privacy Policy
-          ### Last updated: 27/05/2023
+          #### Last updated: 03/27/2023
 
           **Paste69** ('we', 'us', or 'our') operates the 0x45.st website (the 'Service'). Your privacy is important to us, and this Privacy Policy outlines the types of personal information we collect, how we use it, and the steps we take to protect your privacy.
 

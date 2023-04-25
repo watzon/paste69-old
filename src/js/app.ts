@@ -37,6 +37,36 @@ import 'codemirror/mode/erlang/erlang';
 import 'codemirror/mode/julia/julia';
 import 'codemirror/mode/crystal/crystal';
 
+import 'prismjs';
+import 'prismjs/components/prism-markup';
+import 'prismjs/components/prism-markup-templating';
+import 'prismjs/components/prism-css';
+import 'prismjs/components/prism-javascript';
+import 'prismjs/components/prism-json';
+import 'prismjs/components/prism-yaml';
+import 'prismjs/components/prism-xml-doc';
+import 'prismjs/components/prism-php';
+import 'prismjs/components/prism-ruby';
+import 'prismjs/components/prism-python';
+import 'prismjs/components/prism-bash';
+import 'prismjs/components/prism-zig';
+import 'prismjs/components/prism-shell-session';
+import 'prismjs/components/prism-go';
+import 'prismjs/components/prism-rust';
+import 'prismjs/components/prism-swift';
+import 'prismjs/components/prism-dart';
+import 'prismjs/components/prism-sql';
+import 'prismjs/components/prism-docker';
+import 'prismjs/components/prism-haskell';
+import 'prismjs/components/prism-lua';
+import 'prismjs/components/prism-perl';
+import 'prismjs/components/prism-r';
+import 'prismjs/components/prism-scheme';
+import 'prismjs/components/prism-clojure';
+import 'prismjs/components/prism-erlang';
+import 'prismjs/components/prism-julia';
+import 'prismjs/components/prism-crystal';
+
 import '../css/app.scss';
 
 

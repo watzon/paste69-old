@@ -10,6 +10,7 @@ class Home::TermsPage < MainLayout
         mount Shared::MarkdownContent do
           raw Luce.to_html <<-MARKDOWN
           # Terms of Use
+          #### Last updated: 03/27/2023
 
           1. Acceptance of Terms
 

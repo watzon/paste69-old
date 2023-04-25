@@ -10,6 +10,7 @@ class Home::DocsPage < MainLayout
         mount Shared::MarkdownContent do
           raw Luce.to_html <<-MARKDOWN
           # Documentation
+          #### Last updated: 04/25/2023
 
           Paste69 is a simple pastebin service that allows you to share text and code snippets with others. You can do this using the web interface or the API.
 

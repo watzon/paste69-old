@@ -12,7 +12,7 @@ end
     description: "The paste to create",
     properties: [
       Swagger::Property.new(name: "contents", type: "string", required: true),
-      Swagger::Property.new(name: "language", type: "string"),
+      Swagger::Property.new(name: "language", type: "string", default_value: "Plain Text"),
       Swagger::Property.new(name: "fork_of", type: "string"),
     ],
     content_type: "application/json",
@@ -23,12 +23,11 @@ end
   ]
 )]
 class API::V1::Paste::Create < ApiAction
-  param language : String = "Plain Text"
-
   post "/api/v1/paste" do
     content_type = request.headers["Content-Type"]?
     if content_type == "text/plain"
       contents = params.body
+      language = params.get?(:language) || "Plain Text"
       SavePaste.create(contents: contents, language: language) do |op, paste|
         if paste
           json PasteSerializer.new(paste, true)

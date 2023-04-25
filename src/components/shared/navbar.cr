@@ -37,6 +37,12 @@ class Shared::Navbar < BaseComponent
               i class: "fas fa-download fa-lg"
             end
 
+            if fork_of_id = paste.not_nil!.fork_of_hashed_id
+              link to: Paste::Show.with(hashed_id: fork_of_id), class: "px-4 py-2 rounded-md focus:outline-none focus:shadow-outline-blue dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700", title: "View original paste" do
+                i class: "fas fa-code-compare fa-lg"
+              end
+            end
+
             link to: Paste::Fork::Create.with(hashed_id: paste.not_nil!.hashed_id), class: "px-4 py-2 rounded-md focus:outline-none focus:shadow-outline-blue dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700", title: "Fork this paste" do
               i class: "fas fa-code-fork fa-lg"
             end
