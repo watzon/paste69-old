@@ -20,13 +20,17 @@ class Paste::Show < BrowserAction
         plain_text paste.contents
       elsif markdown
         raw_html = Luce.to_html(paste.contents, extension_set: Luce::ExtensionSet::GITHUB_WEB)
-        # TODO: XSS protection
-        html Paste::Markdown::ShowPage, paste: paste, raw_html: raw_html
+        sanitized_html = sanitizer.process(raw_html)
+        html Paste::Markdown::ShowPage, paste: paste, raw_html: sanitized_html
       else
         html Paste::ShowPage, paste: paste
       end
     else
       raise Lucky::RouteNotFoundError.new(context)
     end
+  end
+
+  memoize def sanitizer : Sanitize::Policy
+    Sanitize::Policy::HTMLSanitizer.common
   end
 end

@@ -43,6 +43,9 @@ dependencies:
   luce:
     git: https://codeberg.org/supercell/luce
     version: ~> 0.3.0
+  sanitize:
+    github: straight-shoota/sanitize
+    revision: 75c141b
 
 development_dependencies:
   lucky_flow:
