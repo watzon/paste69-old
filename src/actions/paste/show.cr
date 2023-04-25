@@ -1,5 +1,5 @@
 class Paste::Show < BrowserAction
-  param raw : Bool = false
+  param raw : String?
 
   get "/p/:hashed_id" do
     # Check if the id ends with a .md, if so, render it as markdown
@@ -16,10 +16,11 @@ class Paste::Show < BrowserAction
     end
 
     if (paste = PasteQuery.find(id) rescue nil)
-      if raw
+      if raw && raw.in?(["1", "true", "t", ""])
         plain_text paste.contents
       elsif markdown
         raw_html = Luce.to_html(paste.contents, extension_set: Luce::ExtensionSet::GITHUB_WEB)
+        # TODO: XSS protection
         html Paste::Markdown::ShowPage, paste: paste, raw_html: raw_html
       else
         html Paste::ShowPage, paste: paste

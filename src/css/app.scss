@@ -17,3 +17,11 @@
 .CodeMirror-linenumber {
   padding-right: 5px;
 }
+
+.CodeMirror-wrap pre {
+  word-break: break-word;
+}
+
+.prose {
+  max-width: 90ch !important;
+}

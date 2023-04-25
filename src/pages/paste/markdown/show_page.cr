@@ -3,14 +3,12 @@ class Paste::Markdown::ShowPage < MainLayout
   needs raw_html : String
 
   def content
-    form_for Paste::Create, class: "h-full", autocomplete: "off" do
-      div class: "flex flex-col min-h-full justify-between" do
-        mount Shared::Navbar, paste: paste
-        mount Shared::MarkdownContent do
-          raw raw_html
-        end
-        mount Shared::Footer
+    form_for Paste::Create, class: "flex flex-col min-h-full justify-between", autocomplete: "off" do
+      mount Shared::Navbar, paste: paste
+      mount Shared::MarkdownContent do
+        raw raw_html
       end
+      mount Shared::Footer
     end
   end
 end

@@ -2,7 +2,7 @@ class SerializedPaste
   include JSON::Serializable
 
   property contents : String
-  property language : String?
+  property language : String = "Plain Text"
   property fork_of : String?
 end
 
@@ -23,13 +23,27 @@ end
   ]
 )]
 class API::V1::Paste::Create < ApiAction
+  param language : String = "Plain Text"
+
   post "/api/v1/paste" do
-    serialized_paste = SerializedPaste.from_json(params.body)
-    SavePasteJson.create(serialized_paste: serialized_paste) do |op, paste|
-      if paste
-        json PasteSerializer.new(paste)
-      else
-        json ErrorSerializer.new(success: false, error: "Invalid parameters"), status: 422
+    content_type = request.headers["Content-Type"]?
+    if content_type == "text/plain"
+      contents = params.body
+      SavePaste.create(contents: contents, language: language) do |op, paste|
+        if paste
+          json PasteSerializer.new(paste, true)
+        else
+          json ErrorSerializer.new(success: false, error: "Invalid parameters"), status: 422
+        end
+      end
+    else
+      serialized_paste = SerializedPaste.from_json(params.body)
+      SavePasteJson.create(serialized_paste: serialized_paste) do |op, paste|
+        if paste
+          json PasteSerializer.new(paste, true)
+        else
+          json ErrorSerializer.new(success: false, error: "Invalid parameters"), status: 422
+        end
       end
     end
   end

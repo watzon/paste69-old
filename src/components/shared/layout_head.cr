@@ -20,6 +20,11 @@ class Shared::LayoutHead < BaseComponent
       meta content: "en_US", property: "og:locale"
       meta content: File.join(ENV["APP_DOMAIN"], asset("images/logo.png")), property: "og:image"
 
+      # Share enabled languages with JS
+      tag "script", type: "text/javascript" do
+        raw "window.enabledLanguages = #{ENABLED_LAGUAGES.to_json}"
+      end
+
       # Used only in development when running `lucky watch`.
       # Will reload browser whenever files change.
       # See [docs]()

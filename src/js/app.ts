@@ -42,6 +42,10 @@ import '../css/app.scss';
 
 declare global {
   function copyValue(str: string): void
+
+  interface Window {
+    enabledLanguages: string[]
+  }
 }
 
 // Copy the given value to the user's clipboard
@@ -58,51 +62,14 @@ globalThis.copyValue = (str: string) => {
 // ███████ ██████  ██    ██     ██████  ██   ██ 
 
 // A list of common languages that we want to be available to use in the editor.
-const enabledLanguages = [
-  "HTML",
-  "CSS",
-  "JavaScript",
-  "TypeScript",
-  "JSON",
-  "Markdown",
-  "YAML",
-  "XML",
-  "PHP",
-  "Ruby",
-  "Python",
-  "Bash",
-  "C",
-  "C++",
-  "C#",
-  "Java",
-  "Go",
-  "Rust",
-  "Swift",
-  "Kotlin",
-  "Dart",
-  "SQL",
-  "Dockerfile",
-  "Haskell",
-  "Lua",
-  "Perl",
-  "R",
-  "Scala",
-  "Scheme",
-  "Clojure",
-  "Elixir",
-  "Erlang",
-  "Julia",
-  "OCaml",
-  "Racket",
-  "Vim",
-  "Crystal",
-].sort(); // Sort alphabetically
+const enabledLanguages = window.enabledLanguages;
 
 let editor: CodeMirror.Editor;
 const editorTextArea = document.getElementById("editor") as HTMLTextAreaElement;
 if (editorTextArea) {
   editor = CodeMirror.fromTextArea(editorTextArea, {
     lineNumbers: true,
+    lineWrapping: true,
     mode: "htmlmixed",
   });
   

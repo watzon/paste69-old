@@ -31,6 +31,12 @@ class Shared::Navbar < BaseComponent
               end
             end
 
+            # Download button
+            filename = paste.not_nil!.hashed_id + "." + LANGUAGE_TO_EXTENSION.fetch(paste.not_nil!.language, "txt")
+            a href: Paste::Show.path(hashed_id: paste.not_nil!.hashed_id) + "?raw", download: filename, class: "px-4 py-2 rounded-md focus:outline-none focus:shadow-outline-blue dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700", title: "Download this paste" do
+              i class: "fas fa-download fa-lg"
+            end
+
             link to: Paste::Fork::Create.with(hashed_id: paste.not_nil!.hashed_id), class: "px-4 py-2 rounded-md focus:outline-none focus:shadow-outline-blue dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700", title: "Fork this paste" do
               i class: "fas fa-code-fork fa-lg"
             end
