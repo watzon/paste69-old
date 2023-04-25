@@ -21,23 +21,22 @@ function show_help {
   echo "  -l, --language <language>  Set the language of the paste"
 }
 
-# Check if a file was provided
+# Check if a path to a file was provided, otherwise read from stdin. If all
+# else fails, show the help text.
 if [ -z "$1" ]; then
-  echo "Error: no file provided"
-  show_help
-  exit 1
-fi
-
-# Check if the file exists, is empty, or is a directory
-if [ ! -f "$1" ]; then
-  echo "Error: file does not exist"
-  exit 1
-elif [ ! -s "$1" ]; then
-  echo "Error: file is empty"
-  exit 1
-elif [ -d "$1" ]; then
-  echo "Error: file is a directory"
-  exit 1
+  if [ -p /dev/stdin ]; then
+    data=$(cat -)
+  else
+    echo "Error: no file provided"
+    show_help
+    exit 1
+  fi
+else
+  if [ ! -f "$1" ]; then
+    echo "Error: file $1 does not exist"
+    exit 1
+  fi
+  data=$(cat $1)
 fi
 
 # Check if a language was provided
@@ -57,16 +56,16 @@ if [ ! -z "$2" ]; then
 fi
 
 # Build the URL
-url="http://localhost:3000/api/v1/paste"
+url="https://0x45.st/api/v1/paste"
 if [ ! -z "$language" ]; then
   url="$url?language=$language"
 fi
 
 # Make the request
-response=$(curl -s -X POST -H "Content-Type: text/plain" --data-binary "@$1" $url)
+response=$(curl -s -X POST -H "Content-Type: text/plain" -d "$data" $url)
 
 if [ $? -ne 0 ]; then
-  echo "Error: $response"
+  echo "An error occurred while making the request"
   exit 1
 fi
 
