@@ -19,7 +19,7 @@ function show_help {
   echo "  paste69 <file> [options]"
   echo "Options:"
   echo "  -h, --help                 Show this help text"
-  echo "  -l, --language <language>  Set the language of the paste"
+  echo "  -l, --language <language>  Set the language of the paste. If a file is provided, the language will be automatically detected."
 }
 
 # Parse arguments
@@ -38,6 +38,7 @@ while [[ $# -gt 0 ]]; do
     *)
       if [ -z "$file" ]; then
         file=$1
+        extension="${file##*.}"
       else
         echo "Error: too many arguments"
         show_help
@@ -59,6 +60,8 @@ fi
 url="https://0x45.st/api/v1/paste"
 if [ ! -z "$language" ]; then
   url="$url?language=$language"
+elif [ ! -z "$extension" ]; then
+  url="$url?extension=$extension"
 fi
 
 # Make the request
