@@ -14,6 +14,9 @@ class Paste::IndexPage < MainLayout
             text paste.contents
           end
         end
+        if paste = fork_of
+          input type: "hidden", name: "paste:fork_of", value: paste.hashed_id
+        end
         mount Shared::Footer
       end
     end
