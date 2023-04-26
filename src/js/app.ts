@@ -9,6 +9,7 @@ import "@fortawesome/fontawesome-free/js/all";
 
 import flourite from 'flourite';
 import * as monaco from 'monaco-editor';
+import rubyLanguage from 'monaco-editor/esm/vs/basic-languages/ruby/ruby';
 import zigLanguage from './editor/languages/zig';
 import githubLight from './editor/github-light.json';
 import githubDark from './editor/github-dark.json';
@@ -81,6 +82,9 @@ if (editorContainer && editorTextArea) {
   // Register languages
   monaco.languages.register({ id: 'zig' });
   monaco.languages.setMonarchTokensProvider('zig', zigLanguage as monaco.languages.IMonarchLanguage);
+  
+  monaco.languages.register({ id: 'crystal' }); // Map to ruby for now
+  monaco.languages.setMonarchTokensProvider('crystal', rubyLanguage as monaco.languages.IMonarchLanguage);
 
   // Set themes
   monaco.editor.defineTheme('github-light', githubLight as monaco.editor.IStandaloneThemeData);
