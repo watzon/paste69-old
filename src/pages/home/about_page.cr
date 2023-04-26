@@ -24,9 +24,8 @@ class Home::AboutPage < MainLayout
 
           - [Lucky](https://luckyframework.org) for making web development fun and easy
           - [Supercell](https://codeberg.org/supercell) for providing a great open source [markdown renderer](https://codeberg.org/supercell/luce) for Crystal.
-          - [Catppuccin](https://github.com/catppuccin) for an awesome theme which I use everywhere.
           - [Tailwind](https://tailwindcss.com) for making CSS less of a pain.
-          - [CodeMirror](https://codemirror.net) for providing an awesome code editor.
+          - [Monaco Editor](https://github.com/microsoft/monaco-editor) for providing an awesome code editor.
 
           ### Enjoying Paste69?
           <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="watzon" data-color="#40DCA5" data-emoji=""  data-font="Comic" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#ffffff" data-coffee-color="#FFDD00" ></script>

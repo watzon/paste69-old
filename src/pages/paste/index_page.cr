@@ -8,13 +8,10 @@ class Paste::IndexPage < MainLayout
       end
       div class: "flex flex-col h-full justify-between" do
         mount Shared::Navbar, paste: fork_of
-        div class: "w-full flex-grow" do
+        div id: "editor", class: "w-full flex-grow", data_language: fork_of.try(&.language.downcase) || "plaintext"
+        textarea id: "editor-contents", class: "hidden", name: "paste:contents" do
           if paste = fork_of
-            textarea id: "editor", name: "paste:contents", data_language: paste.language do
-              text paste.contents
-            end
-          else
-            textarea id: "editor", name: "paste:contents"
+            text paste.contents
           end
         end
         mount Shared::Footer

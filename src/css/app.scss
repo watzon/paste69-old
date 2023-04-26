@@ -3,26 +3,18 @@
 @tailwind utilities;
 
 @import url(https://cdn.xeiaso.net/static/css/iosevka/family.css);
-@import "~codemirror/lib/codemirror.css";
 @import "~prismjs/themes/prism-tomorrow.css";
-@import "./ctp-mocha.css";
-@import "./ctp-latte.css";
 
-.CodeMirror {
-  height: 100%;
-  font-size: 16px;
-  padding: 15px 5px;
-  font-family: "Iosevka Aile Iaso", sans-serif;
-}
+#editor {
+    background-color: #24292E;
 
-.CodeMirror-linenumber {
-  padding-right: 5px;
-}
+    &[data-readonly="true"] .monaco-editor {
+        .view-overlays .current-line {
+            background-color: transparent !important;
+        }
 
-.CodeMirror-wrap pre {
-  word-break: break-word;
-}
-
-.prose {
-  max-width: 90ch !important;
+        .cursors-layer .cursor {
+            display: none !important;
+        }
+    }
 }

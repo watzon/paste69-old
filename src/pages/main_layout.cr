@@ -10,7 +10,7 @@ abstract class MainLayout
   def render
     html_doctype
 
-    html lang: "en", class: "w-full h-full" do
+    html lang: "en", class: "w-full h-full dark" do
       mount Shared::LayoutHead, page_title: page_title
 
       body class: "w-full h-full" do

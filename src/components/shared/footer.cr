@@ -1,6 +1,6 @@
 class Shared::Footer < BaseComponent
   def render
-    footer class: "bg-gray-200 border-gray-200 py-2.5 dark:bg-gray-800" do
+    footer class: "bg-gray-200 border-gray-200 py-2.5 dark:bg-[#2a5460]" do
       div class: "text-center text-gray-800 dark:text-gray-200" do
         text "Made with "
         span "❤️", class: "text-red-500"

@@ -2,12 +2,11 @@ class Shared::Navbar < BaseComponent
   needs paste : Paste?
 
   def render
-    nav class: "bg-gray-200 border-gray-200 py-2.5 dark:bg-gray-800" do
+    nav class: "bg-gray-200 border-gray-200 py-2.5 dark:bg-[#2a5460]" do
       div class: "flex flex-wrap justify-between items-center" do
         a class: "flex items-center px-4", href: ENV["APP_DOMAIN"] do
           div class: "flex items-end gap-1" do
-            span "Paste", class: "text-3xl font-semibold dark:text-white leading-6"
-            img src: asset("images/logo.svg"), class: "h-8 w-8"
+            img src: asset("images/logo-large.svg"), class: "h-12", alt: "Paste 69 logo"
           end
         end
         div class: "flex items-center px-4 justify-between lg:order-2" do
@@ -48,15 +47,15 @@ class Shared::Navbar < BaseComponent
             end
           end
 
-          # Theme toggle
-          button id: "theme-toggle", type: "button", class: "ml-4 px-4 py-2 rounded-md focus:outline-none focus:shadow-outline-blue dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700", title: "Toggle theme" do
-            span class: "inline-block dark:hidden" do
-              i class: "fas fa-sun fa-lg"
-            end
-            span class: "hidden dark:inline-block" do
-              i class: "fas fa-moon fa-lg"
-            end
-          end
+          # # Theme toggle
+          # button id: "theme-toggle", type: "button", class: "ml-4 px-4 py-2 rounded-md focus:outline-none focus:shadow-outline-blue dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700", title: "Toggle theme" do
+          #   span class: "inline-block dark:hidden" do
+          #     i class: "fas fa-sun fa-lg"
+          #   end
+          #   span class: "hidden dark:inline-block" do
+          #     i class: "fas fa-moon fa-lg"
+          #   end
+          # end
         end
         div class: "hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1" do
           if !current_page?(Paste::Index)

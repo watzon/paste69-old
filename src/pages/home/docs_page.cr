@@ -26,6 +26,10 @@ class Home::DocsPage < MainLayout
 
           Sometimes you may wish to download a paste directly rather than copy/pasting it. To get a raw text response without any of the UI clutter, just add the `?raw` flag to the end of a paste URL. For example, [https://0x45.st/p/xrQZGRNA?raw](https://0x45.st/p/xrQZGRNA?raw).
 
+          ### Forking
+
+          For now there is no editing built into Paste69, and there may never be. Instead you can fork a paste to create a new paste with the same contents. To do this, just click the `Fork` button on any paste. You can also use the `--fork-of` flag when using the bash script. Forks will be linked together, so you can easily see the history of a paste.
+
           ## API
 
           Swagger documentation is available at [/api/v1](/api/v1). The purpose of this documentation will be to explain in a little bit more detail what is possible through the API.
@@ -57,7 +61,7 @@ class Home::DocsPage < MainLayout
 
           Fetching a paste requires that you know the ID of that paste. You can then send a GET request to `/api/v1/paste/:id`, where `:id` is the ID of the paste you want to fetch.
 
-          The response will be exactly the same as the above JSON object, but without the `deletion_token`.
+          The response will be exactly the same as the above JSON object, but without the `deletion_token` and with the addition of a `forks` array, which contains all of the pastes that were forked from this paste.
 
           ### Delete a paste
 
