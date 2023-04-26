@@ -9,7 +9,7 @@ import "@fortawesome/fontawesome-free/js/all";
 
 import flourite from 'flourite';
 import * as monaco from 'monaco-editor';
-import rubyLanguage from 'monaco-editor/esm/vs/basic-languages/ruby/ruby';
+import { language as rubyLanguage } from './editor/languages/ruby';
 import zigLanguage from './editor/languages/zig';
 import githubLight from './editor/github-light.json';
 import githubDark from './editor/github-dark.json';
