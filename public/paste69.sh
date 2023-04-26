@@ -48,22 +48,11 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-# Check if a path to a file was provided, otherwise read from stdin. If all
-# else fails, show the help text.
-if [ -z "$1" ]; then
-  if [ -p /dev/stdin ]; then
-    data=$(cat -)
-  else
-    echo "Error: no file provided"
-    show_help
-    exit 1
-  fi
-else
-  if [ ! -f "$1" ]; then
-    echo "Error: file $1 does not exist"
-    exit 1
-  fi
-  file=$1
+# Check if data or a file was provided, otherwise error out
+if [ -z "$file" ] && [ -z "$data" ]; then
+  echo "Error: no data or file provided"
+  show_help
+  exit 1
 fi
 
 # Build the URL

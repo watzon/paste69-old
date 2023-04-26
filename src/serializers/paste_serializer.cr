@@ -14,7 +14,7 @@ class PasteSerializer < BaseSerializer
 
     if @is_new
       paste_tuple = paste_tuple.merge({
-        deletion_token: File.join(ENV["APP_DOMAIN"], "p", hashed_id, "delete?deletion_token=#{@paste.deletion_token}")
+        delete_link: File.join(ENV["APP_DOMAIN"], "p", hashed_id, "delete?deletion_token=#{@paste.deletion_token}")
       })
     else
       paste_tuple = paste_tuple.merge({
