@@ -22,22 +22,16 @@ class Shared::Navbar < BaseComponent
             end
           end
 
-          if paste && current_page?(Paste::Show.with(hashed_id: paste.not_nil!.hashed_id))
-            # Link to the markdown variant if this is a markdown paste
-            if paste.not_nil!.language == "Markdown"
-              a href: Paste::Show.path(hashed_id: paste.not_nil!.hashed_id) + ".md", class: "px-4 py-2 rounded-md focus:outline-none focus:shadow-outline-blue dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700", title: "View Rendered Markdown" do
-                i class: "fab fa-markdown fa-lg"
-              end
-            end
+          if paste && context.request.path.starts_with?("/p/")
+            filename = paste.not_nil!.filename
 
             # Download button
-            filename = paste.not_nil!.hashed_id + "." + LANGUAGE_TO_EXTENSION.fetch(paste.not_nil!.language, "txt")
-            a href: Paste::Show.path(hashed_id: paste.not_nil!.hashed_id) + "?raw", download: filename, class: "px-4 py-2 rounded-md focus:outline-none focus:shadow-outline-blue dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700", title: "Download this paste" do
+            a href: Paste::Show.path(filename: filename) + "?raw", download: filename, class: "px-4 py-2 rounded-md focus:outline-none focus:shadow-outline-blue dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700", title: "Download this paste" do
               i class: "fas fa-download fa-lg"
             end
 
-            if fork_of_id = paste.not_nil!.fork_of_hashed_id
-              link to: Paste::Show.with(hashed_id: fork_of_id), class: "px-4 py-2 rounded-md focus:outline-none focus:shadow-outline-blue dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700", title: "View original paste" do
+            if fork = paste.not_nil!.fork_of
+              link to: Paste::Show.with(filename: fork.filename), class: "px-4 py-2 rounded-md focus:outline-none focus:shadow-outline-blue dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700", title: "View original paste" do
                 i class: "fas fa-code-compare fa-lg"
               end
             end

@@ -1,33 +1,34 @@
 class Paste::Show < BrowserAction
   param raw : String?
 
-  get "/p/:hashed_id" do
-    # Check if the id ends with a .md, if so, render it as markdown
+  get "/p/:filename" do
+    parts = filename.split(".")
+    hashed_id = parts.first
+    extension = parts[1]?
+    language = EXTENSION_TO_LANGUAGE[extension]? || "plaintext"
+
     begin
-      if hashed_id.ends_with? ".md"
-        index = hashed_id.rindex(".md")
-        id = Hashids.instance.decode(hashed_id[0...index]).first
-        markdown = true
-      else
-        id = Hashids.instance.decode(hashed_id).first
-      end
+      id = Hashids.instance.decode(hashed_id).first
     rescue
       raise Lucky::RouteNotFoundError.new(context)
     end
 
-    if (paste = PasteQuery.find(id) rescue nil)
+    if (paste = PasteQuery.new.preload_fork_of.find(id) rescue nil)
       if raw && raw.in?(["1", "true", "t", ""])
-        plain_text paste.contents
-      elsif markdown
-        raw_html = Luce.to_html(paste.contents, extension_set: Luce::ExtensionSet::GITHUB_WEB)
-        sanitized_html = sanitizer.process(raw_html)
-        html Paste::Markdown::ShowPage, paste: paste, raw_html: sanitized_html
+        return plain_text paste.contents
       else
-        html Paste::ShowPage, paste: paste
+        case language
+        when "markdown"
+          raw_html = Luce.to_html(paste.contents, extension_set: Luce::ExtensionSet::GITHUB_WEB)
+          sanitized_html = sanitizer.process(raw_html)
+          return html Paste::Markdown::ShowPage, paste: paste, raw_html: sanitized_html
+        else
+          return html Paste::ShowPage, paste: paste, language: language
+        end
       end
-    else
-      raise Lucky::RouteNotFoundError.new(context)
     end
+
+    raise Lucky::RouteNotFoundError.new(context)
   end
 
   memoize def sanitizer : Sanitize::Policy

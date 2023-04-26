@@ -2,18 +2,20 @@ class SerializedPaste
   include JSON::Serializable
 
   property contents : String
-  property language : String = "Plain Text"
+  property language : String?
+  property extension : String?
   property fork_of : String?
 end
 
 @[LuckySwagger::Action(
   summary: "Create a new paste",
   request: Swagger::Request.new(
-    description: "The paste to create",
+    description: "The paste to create. Optionally provide a language or file extension to set the language.",
     properties: [
       Swagger::Property.new(name: "contents", type: "string", required: true),
-      Swagger::Property.new(name: "language", type: "string", default_value: "Plain Text"),
-      Swagger::Property.new(name: "fork_of", type: "string"),
+      Swagger::Property.new(name: "language", type: "string", default_value: nil),
+      Swagger::Property.new(name: "extension", type: "string", default_value: nil),
+      Swagger::Property.new(name: "fork_of", type: "string", default_value: nil),
     ],
     content_type: "application/json",
   ),
@@ -27,7 +29,16 @@ class API::V1::Paste::Create < ApiAction
     content_type = request.headers["Content-Type"]?
     if content_type == "text/plain"
       contents = params.body
-      language = params.get?(:language) || "Plain Text"
+      extension = params.get?(:extension)
+      language = EXTENSION_TO_LANGUAGE[extension]? || params.get?(:language)
+      language = language.nil? || language.empty? ? "plaintext" : language
+
+      pp language
+
+      if !LANGUAGE_TO_EXTENSION.has_key?(language)
+        return json ErrorSerializer.new(success: false, error: "Invalid language"), status: 422
+      end
+
       SavePaste.create(contents: contents, language: language) do |op, paste|
         if paste
           json PasteSerializer.new(paste, true)

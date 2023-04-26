@@ -6,7 +6,7 @@ class PasteSerializer < BaseSerializer
     hashed_id = Hashids.instance.encode([@paste.id])
     paste_tuple = {
       id:          hashed_id,
-      link:        File.join(ENV["APP_DOMAIN"], "p", hashed_id),
+      link:        @paste.link,
       contents:    @paste.contents,
       language:    @paste.language,
       created_at:  @paste.created_at.to_utc,
@@ -14,14 +14,14 @@ class PasteSerializer < BaseSerializer
 
     if @is_new
       paste_tuple = paste_tuple.merge({
-        delete_link: File.join(ENV["APP_DOMAIN"], "p", hashed_id, "delete?deletion_token=#{@paste.deletion_token}")
+        delete_link: @paste.delete_link
       })
     else
       paste_tuple = paste_tuple.merge({
         forks: @paste.forks.map do |fork|
           {
-            id:         Hashids.instance.encode([fork.id]),
-            link:       File.join(ENV["APP_DOMAIN"], "p", hashed_id),
+            id:         fork.hashed_id,
+            link:       fork.link,
             created_at: fork.created_at.to_utc,
           }
         end

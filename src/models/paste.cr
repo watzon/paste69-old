@@ -20,11 +20,19 @@ class Paste < BaseModel
     end
   end
 
-  def link
-    File.join(ENV["APP_DOMAIN"], "p", hashed_id)
+  def extension
+    LANGUAGE_TO_EXTENSION[language.downcase]
   end
 
-  def deletion_url
-    File.join(ENV["APP_DOMAIN"], "p", hashed_id, "delete?deletion_token=#{deletion_token}")
+  def filename
+    "#{hashed_id}.#{extension}"
+  end
+
+  def link
+    File.join(ENV["APP_DOMAIN"], "p", hashed_id + "." + extension)
+  end
+
+  def delete_link
+    File.join(link, "delete?deletion_token=#{deletion_token}")
   end
 end

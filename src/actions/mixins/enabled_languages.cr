@@ -164,3 +164,5 @@ LANGUAGE_TO_EXTENSION = {
   "yaml"           => "yaml",
   "zig"            => "zig",
 }
+
+EXTENSION_TO_LANGUAGE = LANGUAGE_TO_EXTENSION.invert
