@@ -33,8 +33,6 @@ class API::V1::Paste::Create < ApiAction
       language = EXTENSION_TO_LANGUAGE[extension]? || params.get?(:language)
       language = language.nil? || language.empty? ? "plaintext" : language
 
-      pp language
-
       if !LANGUAGE_TO_EXTENSION.has_key?(language)
         return json ErrorSerializer.new(success: false, error: "Invalid language"), status: 422
       end

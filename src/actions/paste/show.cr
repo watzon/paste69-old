@@ -32,6 +32,9 @@ class Paste::Show < BrowserAction
   end
 
   memoize def sanitizer : Sanitize::Policy
-    Sanitize::Policy::HTMLSanitizer.common
+    safelist = Sanitize::Policy::HTMLSanitizer::COMMON_SAFELIST
+    safelist["code"].add "class"
+
+    Sanitize::Policy::Whitelist.new(safelist)
   end
 end

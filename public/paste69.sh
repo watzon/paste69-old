@@ -32,8 +32,7 @@ while [[ $# -gt 0 ]]; do
       ;;
     -l|--language)
       language="$2"
-      shift
-      shift
+      shift 2
       ;;
     *)
       if [ -z "$file" ]; then
