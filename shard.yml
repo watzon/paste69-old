@@ -20,6 +20,9 @@ dependencies:
   avram:
     github: luckyframework/avram
     version: ~> 1.0.0-rc1
+  authentic:
+    github: luckyframework/authentic
+    version: ~> 1.0.0
   carbon:
     github: luckyframework/carbon
     version: ~> 0.3.0

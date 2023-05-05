@@ -4,6 +4,10 @@ shards:
     git: https://github.com/sija/any_hash.cr.git
     version: 0.2.5
 
+  authentic:
+    git: https://github.com/luckyframework/authentic.git
+    version: 1.0.0
+
   avram:
     git: https://github.com/luckyframework/avram.git
     version: 1.0.0
